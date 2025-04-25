@@ -1,59 +1,107 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Feather";
 
 export default function Home() {
   const navigation = useNavigation<any>();
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../assets/ajuda-humanitaria.jpg")}
-        style={styles.banner}
-        resizeMode="cover"
-      />
-      <Text style={styles.title}>Bem-vindo ao Solidariza+</Text>
-      <Text style={styles.subtitle}>
-        Encontre e apoie projetos sociais de todo o mundo!
-      </Text>
+    <ImageBackground
+      source={require("../assets/mundo.png")}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.title}>Bem-vindo ao Solidariza+</Text>
+        <Text style={styles.subtitle}>
+          Descubra iniciativas transformadoras e apoie projetos sociais ao redor
+          do mundo. Conecte-se com causas que fazem a diferença, fortaleça
+          comunidades e contribua para um futuro mais justo e solidário por meio
+          da sua generosidade.
+        </Text>
 
-      <Image
-        source={require("../assets/organizacoes_de_ajuda_humanitaria.jpg")}
-        style={styles.image}
-        resizeMode="contain"
-      />
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Projetos")}
+          >
+            <Text style={styles.buttonText}>Ver Projetos</Text>
+          </TouchableOpacity>
 
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Projetos")}
-        >
-          <Text style={styles.buttonText}>Ver Projetos</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Buscar")}
-        >
-          <Text style={styles.buttonText}>Buscar</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Buscar")}
+          >
+            <View style={styles.buttonContent}>
+              <Icon
+                name="search"
+                size={20}
+                color="#FFF"
+                style={{ marginRight: 8 }}
+              />
+              <Text style={styles.buttonText}>Buscar</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", padding: 20, backgroundColor: "#fff" },
-  banner: { width: "100%", height: 150, borderRadius: 10, marginBottom: 20 },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
-  subtitle: { fontSize: 16, textAlign: "center", marginBottom: 20 },
-  image: { width: 200, height: 200, marginBottom: 30 },
-  buttonsContainer: { flexDirection: "row", gap: 10 },
+  background: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  overlay: {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    marginHorizontal: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#2F855A",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#4A5568",
+    textAlign: "center",
+    marginBottom: 30,
+    paddingHorizontal: 10,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 10,
+  },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#38A169",
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 10,
+    marginHorizontal: 5,
   },
-  buttonText: { color: "#fff", fontWeight: "bold" },
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

@@ -1,18 +1,29 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { 
+  View, 
+  Text, 
+  Image, 
+  StyleSheet, 
+  ScrollView, 
+  TouchableOpacity, 
+  Linking 
+} from "react-native";
 
 const members = [
   {
     name: "Nicolas Dobbeck",
     image: require("../assets/nicolas.jpg"),
+    github: "https://github.com/NicolasDobbeck",
   },
   {
     name: "José Bezerra",
     image: require("../assets/jose.jpg"),
+    github: "https://github.com/jjosebastos",
   },
   {
     name: "Thiago Henry",
     image: require("../assets/thiago.png"),
+    github: "https://github.com/lavithiluan",
   },
 ];
 
@@ -21,10 +32,14 @@ export default function Team() {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Integrantes</Text>
       {members.map((member, index) => (
-        <View key={index} style={styles.card}>
+        <TouchableOpacity 
+          key={index} 
+          style={styles.card} 
+          onPress={() => Linking.openURL(member.github)}
+        >
           <Image source={member.image} style={styles.image} />
           <Text style={styles.name}>{member.name}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );
@@ -40,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginVertical: 20,
+    color: "#2F855A",
   },
   card: {
     backgroundColor: "#fff",
@@ -63,5 +79,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#333",
   },
 });
